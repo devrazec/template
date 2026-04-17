@@ -19,6 +19,8 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import Paper from "@mui/material/Paper";
 
+const DRAWER_WIDTH = 240;
+
 export default function Header() {
   const {
     dbProduct,
@@ -44,6 +46,31 @@ export default function Header() {
     setHeaderFontSize,
     headerBackgroundSelected,
     setHeaderBackgroundSelected,
+
+    logoSelected,
+    setLogoSelected,
+    logoSize,
+    setLogoSize,
+    logoBackgroundSelected,
+    setLogoBackgroundSelected,
+
+    logoTitle,
+    setLogoTitle,
+    logoTitleSize,
+    setLogoTitleSize,
+    logoTitleDarkColor,
+    setLogoTitleDarkColor,
+    logoTitleLightColor,
+    setLogoTitleLightColor,
+
+    logoSubTitle,
+    setLogoSubTitle,
+    logoSubTitleSize,
+    setLogoSubTitleSize,
+    logoSubTitleDarkColor,
+    setLogoSubTitleDarkColor,
+    logoSubTitleLightColor,
+    setLogoSubTitleLightColor,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
@@ -58,54 +85,104 @@ export default function Header() {
   return (
     <AppBar
       position="fixed"
+      elevation={0}
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: "#00a76f1f",
-        backdropFilter: "blur(4px)",
-        borderBottom: "1px solid",
-        borderColor: "divider",
+        //backgroundColor: "#00a76f1f",
+        //backdropFilter: "blur(4px)",
+        //borderBottom: "1px solid",
+        //borderColor: "divider",
+        left: { xs: 0, md: DRAWER_WIDTH },
+        right: 0,
+        width: { xs: "100%", md: `calc(100% - ${DRAWER_WIDTH}px)` },
       }}
     >
-      <Toolbar>
-        {mobileDevice ? (
-          <Box sx={{ display: "flex", alignItems: "center", mr: 1 }}>
-            <Image
-              src="/logo1.png"
-              alt="Logo"
-              width={42}
-              height={42}
-              style={{ objectFit: "contain" }}
-            />
+      <Toolbar 
+        sx={{ 
+          padding: 0, 
+          height: 70, 
+          display: "flex",
+          backgroundImage: `url(${headerBackgroundSelected})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Mobile Logo */}
+        <Box
+          sx={{
+            display: { xs: "flex", md: "none" },
+            alignItems: "center",
+            height: 70,
+            backgroundImage: `url(${logoBackgroundSelected})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            paddingY: 0,
+            paddingRight: 1,
+            paddingLeft: 1,
+            //borderRadius: 1,
+          }}
+        >
+          <Image
+            src={logoSelected}
+            alt="Logo"
+            width={logoSize.width}
+            height={logoSize.height}
+            style={{ objectFit: "contain" }}
+          />
+          <Box sx={{ display: "flex", flexDirection: "column", ml: 1 }}>
+            <Typography
+              sx={{
+                fontSize: logoTitleSize,
+                fontWeight: "bold",
+                color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
+                lineHeight: 1.2,
+              }}
+            >
+              {logoTitle}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: logoSubTitleSize,
+                color: darkMode
+                  ? logoSubTitleLightColor
+                  : logoSubTitleDarkColor,
+                lineHeight: 1.2,
+              }}
+            >
+              {logoSubTitle}
+            </Typography>
           </Box>
-        ) : (
-          <Box sx={{ display: "flex", alignItems: "center", mr: 1 }}>
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={140}
-              height={60}
-              style={{ objectFit: "contain" }}
-            />
-          </Box>
-        )}
+        </Box>
 
+        {/* Block 2: Header Content - Flexible width */}
         <Box
           sx={{
             flexGrow: 1,
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
-            gap: 1,
+            justifyContent: "space-between",
+            minHeight: 70,
+            paddingX: 2,
+            marginLeft: { xs: 0, md: 0 },
           }}
         >
-          <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
-            {pathname === "/" ? "Home" : pathname.replace("/pages/", "")}
-          </Typography>
-        </Box>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
+              {pathname === "/" ? "Home" : pathname.replace("/pages/", "")}
+            </Typography> */}
+          </Box>
 
-        <IconButton color="primary" onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton>
+          <IconButton color="primary" onClick={() => setDarkMode(!darkMode)}>
+            {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   );

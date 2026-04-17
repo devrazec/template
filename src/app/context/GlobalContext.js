@@ -397,39 +397,39 @@ export function GlobalProvider({ children }) {
   const [headerFontDarkColor, setHeaderFontDarkColor] = useState('#000000');
   const [headerFontLightColor, setHeaderFontLightColor] = useState('#ffffff');
   const [headerFontSize, setHeaderFontSize] = useState(20);
-  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState('1.jpg');
+  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState('/headerbottom/61.jpg');
 
   const [bottomFontDarkColor, setBottomFontDarkColor] = useState('#000000');
   const [bottomFontLightColor, setBottomFontLightColor] = useState('#ffffff');
-  const [bottomFontSize, setBottomFontSize] = useState(16);
-  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState('#000000');
-  const [bottomActiveLightColor, setBottomActiveLightColor] = useState('#ffffff');
-  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState('1.jpg');
+  const [bottomFontSize, setBottomFontSize] = useState(14);
+  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState('#490fe9');
+  const [bottomActiveLightColor, setBottomActiveLightColor] = useState('#ae4040');
+  const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState('#000000');
+  const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState('#ffffff');
+  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState('/headerbottom/61.jpg');
 
   const [menuFontDarkColor, setMenuFontDarkColor] = useState('#000000');
   const [menuFontLightColor, setMenuFontLightColor] = useState('#ffffff');
-  const [menuFontSize, setMenuFontSize] = useState(16);
-  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState('1.jpg');
-
-  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState('#000000');
-  const [menuActiveLightColor, setMenuActiveLightColor] = useState('#ffffff');
-
+  const [menuFontSize, setMenuFontSize] = useState(20);
+  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState('#3c2791');
+  const [menuActiveLightColor, setMenuActiveLightColor] = useState('#733131');
   const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState('#000000');
   const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState('#ffffff');
+  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState('/menu/50.jpg');
 
-  const [logoSelected, setLogoSelected] = useState('1.png');
-  const [logoSize, setLogoSize] = useState(80);
-  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('1.jpg');
+  const [logoSelected, setLogoSelected] = useState('/logo/1.png');
+  const [logoSize, setLogoSize] = useState({ width: 52, height: 52 });
+  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('');
 
   const [logoTitle, setLogoTitle] = useState('Snack Bar');
-  const [logoTitleSize, setLogoTitleSize] = useState(16);
+  const [logoTitleSize, setLogoTitleSize] = useState(22);
   const [logoTitleDarkColor, setLogoTitleDarkColor] = useState('#000000');
   const [logoTitleLightColor, setLogoTitleLightColor] = useState('#ffffff');
 
   const [logoSubTitle, setLogoSubTitle] = useState('+351 916 095 144');
-  const [logoSubTitleSize, setLogoSubTitleSize] = useState(16);
-  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState('#ffffff');
-  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState('#000000');
+  const [logoSubTitleSize, setLogoSubTitleSize] = useState(14);
+  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState('#000000');
+  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState('#ffffff');
 
   return (
     <GlobalContext.Provider
@@ -470,18 +470,18 @@ export function GlobalProvider({ children }) {
         bottomFontSize, setBottomFontSize,
         bottomActiveDarkColor, setBottomActiveDarkColor,
         bottomActiveLightColor, setBottomActiveLightColor,
+        bottomActiveFontDarkColor, setBottomActiveFontDarkColor,
+        bottomActiveFontLightColor, setBottomActiveFontLightColor,
         bottomBackgroundSelected, setBottomBackgroundSelected,
 
         menuFontDarkColor, setMenuFontDarkColor,
         menuFontLightColor, setMenuFontLightColor,
         menuFontSize, setMenuFontSize,
-        menuBackgroundSelected, setMenuBackgroundSelected,
-
         menuActiveDarkColor, setMenuActiveDarkColor,
         menuActiveLightColor, setMenuActiveLightColor,
-
         menuActiveFontDarkColor, setMenuActiveFontDarkColor,
         menuActiveFontLightColor, setMenuActiveFontLightColor,
+        menuBackgroundSelected, setMenuBackgroundSelected,
 
         logoSelected, setLogoSelected,
         logoSize, setLogoSize,

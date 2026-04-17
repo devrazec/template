@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 import { useRouter, usePathname } from "next/navigation";
@@ -12,7 +12,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 export default function Bottom() {
-  
   const {
     dbProduct,
     darkMode,
@@ -28,16 +27,42 @@ export default function Bottom() {
     setSelectedRange,
     menuItem,
     setMenuItem,
+
+    bottomFontDarkColor,
+    setBottomFontDarkColor,
+    bottomFontLightColor,
+    setBottomFontLightColor,
+    bottomFontSize,
+    setBottomFontSize,
+    bottomActiveDarkColor,
+    setBottomActiveDarkColor,
+    bottomActiveLightColor,
+    setBottomActiveLightColor,
+    bottomActiveFontDarkColor,
+    setBottomActiveFontDarkColor,
+    bottomActiveFontLightColor,
+    setBottomActiveFontLightColor,
+    bottomBackgroundSelected,
+    setBottomBackgroundSelected,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
   const router = useRouter();
   const scrollRef = useRef(null);
-  const activeIndex = menuItem.findIndex(({ href }) => href === pathname);
+  const foundIndex = menuItem.findIndex(({ href }) => href === pathname);
+  const activeIndex = foundIndex !== -1 ? foundIndex : 0;
 
   const scroll = (dir) => {
     scrollRef.current?.scrollBy({ left: dir * 150, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (scrollRef.current && activeIndex >= 0) {
+      const scrollPosition =
+        activeIndex * 80 - scrollRef.current.offsetWidth / 2 + 40;
+      scrollRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
+    }
+  }, [activeIndex]);
 
   return (
     <Paper
@@ -49,6 +74,10 @@ export default function Bottom() {
         left: 0,
         right: 0,
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        backgroundImage: `url(${bottomBackgroundSelected})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        borderRadius: 0,
       }}
       elevation={3}
     >
@@ -76,6 +105,7 @@ export default function Bottom() {
           sx={{
             width: `${menuItem.length * 80}px`,
             "&::-webkit-scrollbar": { display: "none" },
+            backgroundColor: "transparent",
           }}
         >
           {menuItem.map(({ text, icon }) => (
@@ -86,10 +116,26 @@ export default function Bottom() {
               sx={{
                 minWidth: 72,
                 flexShrink: 0,
+                color: darkMode ? bottomFontDarkColor : bottomFontLightColor,
+                "& .MuiBottomNavigationAction-label": {
+                  fontSize: bottomFontSize,
+                },
+                "& .MuiSvgIcon-root": {
+                  color: darkMode ? bottomFontDarkColor : bottomFontLightColor,
+                },
                 "&.Mui-selected": {
-                  backgroundColor: "#00a76f1f",
-                  color: "primary.main",
-                  "& .MuiSvgIcon-root": { color: "primary.main" },
+                  backgroundColor: darkMode
+                    ? bottomActiveDarkColor
+                    : bottomActiveLightColor,
+                  color: darkMode ? bottomActiveFontDarkColor : bottomActiveFontLightColor,
+                  "& .MuiBottomNavigationAction-label": {
+                    fontSize: bottomFontSize,
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: darkMode
+                      ? bottomActiveFontDarkColor
+                      : bottomActiveFontLightColor,
+                  },
                 },
               }}
             />

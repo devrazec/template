@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -11,7 +12,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
 const DRAWER_WIDTH = 240;
@@ -33,6 +35,48 @@ export default function Left() {
     setSelectedRange,
     menuItem,
     setMenuItem,
+    
+    menuFontDarkColor,
+    setMenuFontDarkColor,
+    menuFontLightColor,
+    setMenuFontLightColor,
+    menuFontSize,
+    setMenuFontSize,
+    menuActiveDarkColor,
+    setMenuActiveDarkColor,
+    menuActiveLightColor,
+    setMenuActiveLightColor,
+    menuActiveFontDarkColor,
+    setMenuActiveFontDarkColor,
+    menuActiveFontLightColor,
+    setMenuActiveFontLightColor,
+    menuBackgroundSelected,
+    setMenuBackgroundSelected,
+    
+    logoSelected,
+    setLogoSelected,
+    logoSize,
+    setLogoSize,
+    logoBackgroundSelected,
+    setLogoBackgroundSelected,
+
+    logoTitle,
+    setLogoTitle,
+    logoTitleSize,
+    setLogoTitleSize,
+    logoTitleDarkColor,
+    setLogoTitleDarkColor,
+    logoTitleLightColor,
+    setLogoTitleLightColor,
+
+    logoSubTitle,
+    setLogoSubTitle,
+    logoSubTitleSize,
+    setLogoSubTitleSize,
+    logoSubTitleDarkColor,
+    setLogoSubTitleDarkColor,
+    logoSubTitleLightColor,
+    setLogoSubTitleLightColor,
   } = useContext(GlobalContext);
 
     const pathname = usePathname();
@@ -47,10 +91,59 @@ export default function Left() {
                 '& .MuiDrawer-paper': {
                     width: DRAWER_WIDTH,
                     boxSizing: 'border-box',
+                    zIndex: (theme) => theme.zIndex.drawer,
+                    overflowX: 'hidden',
+                    backgroundImage: `url(${menuBackgroundSelected})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                 },
             }}
         >
-            <Toolbar />
+            {/* Logo Section */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: DRAWER_WIDTH,
+                    height: 70,
+                    backgroundImage: `url(${logoBackgroundSelected})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    paddingY: 0,
+                    paddingRight: 2,
+                    paddingLeft: 1,
+                }}
+            >
+                <Image
+                    src={logoSelected}
+                    alt="Logo"
+                    width={logoSize.width}
+                    height={logoSize.height}
+                    style={{ objectFit: 'contain' }}
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 1 }}>
+                    <Typography
+                        sx={{
+                            fontSize: logoTitleSize,
+                            fontWeight: 'bold',
+                            color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
+                            lineHeight: 1.2,
+                        }}
+                    >
+                        {logoTitle}
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: logoSubTitleSize,
+                            color: darkMode ? logoSubTitleLightColor : logoSubTitleDarkColor,
+                            lineHeight: 1.2,
+                        }}
+                    >
+                        {logoSubTitle}
+                    </Typography>
+                </Box>
+            </Box>
+            
             <List>
                 {menuItem.map(({ text, icon, href }) => (
                     <ListItem key={text} disablePadding>
@@ -59,12 +152,23 @@ export default function Left() {
                             href={href}
                             selected={pathname === href}
                             sx={{
+                                color: darkMode ? menuFontDarkColor : menuFontLightColor,
+                                '& .MuiListItemIcon-root': {
+                                    color: darkMode ? menuFontDarkColor : menuFontLightColor,
+                                },
+                                '& .MuiListItemText-primary': {
+                                    fontSize: menuFontSize,
+                                },
                                 '&.Mui-selected': {
-                                    
-                                    backgroundColor: '#00a76f1f',
-                                    color: 'primary.main',
-                                    '& .MuiListItemIcon-root': { color: 'primary.main' },
-                                    '&:hover': { backgroundColor: '#00a76f33' },
+                                    backgroundColor: darkMode ? menuActiveDarkColor : menuActiveLightColor,
+                                    color: darkMode ? menuActiveFontDarkColor : menuActiveFontLightColor,
+                                    '& .MuiListItemIcon-root': {
+                                        color: darkMode ? menuActiveFontDarkColor : menuActiveFontLightColor,
+                                    },
+                                    '&:hover': {
+                                        backgroundColor: darkMode ? menuActiveDarkColor : menuActiveLightColor,
+                                        opacity: 0.9,
+                                    },
                                 },
                             }}
                         >
