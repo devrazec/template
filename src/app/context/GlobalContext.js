@@ -416,10 +416,10 @@ export function GlobalProvider({ children }) {
   const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState('#000000');
   const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState('#ffffff');
   const [menuBackgroundSelected, setMenuBackgroundSelected] = useState('/menu/50.jpg');
-
+  
   const [logoSelected, setLogoSelected] = useState('/logo/1.png');
   const [logoSize, setLogoSize] = useState({ width: 52, height: 52 });
-  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('');
+  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('/menu/50.jpg');
 
   const [logoTitle, setLogoTitle] = useState('Snack Bar');
   const [logoTitleSize, setLogoTitleSize] = useState(22);
@@ -430,6 +430,11 @@ export function GlobalProvider({ children }) {
   const [logoSubTitleSize, setLogoSubTitleSize] = useState(14);
   const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState('#000000');
   const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState('#ffffff');
+
+  const [enableLogoBackground, setEnableLogoBackground] = useState(true);
+  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
+  const [enableBottomBackground, setEnableBottomBackground] = useState(true);
+  const [enableHeaderBackground, setEnableHeaderBackground] = useState(true);
 
   return (
     <GlobalContext.Provider
@@ -496,6 +501,11 @@ export function GlobalProvider({ children }) {
         logoSubTitleSize, setLogoSubTitleSize,
         logoSubTitleDarkColor, setLogoSubTitleDarkColor,
         logoSubTitleLightColor, setLogoSubTitleLightColor,
+
+        enableLogoBackground, setEnableLogoBackground,
+        enableMenuBackground, setEnableMenuBackground,
+        enableBottomBackground, setEnableBottomBackground,
+        enableHeaderBackground, setEnableHeaderBackground,
 
       }}
     >

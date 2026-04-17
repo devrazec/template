@@ -44,6 +44,15 @@ export default function Bottom() {
     setBottomActiveFontLightColor,
     bottomBackgroundSelected,
     setBottomBackgroundSelected,
+
+    enableLogoBackground,
+    setEnableLogoBackground,
+    enableMenuBackground,
+    setEnableMenuBackground,
+    enableBottomBackground,
+    setEnableBottomBackground,
+    enableHeaderBackground,
+    setEnableHeaderBackground,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
@@ -74,7 +83,7 @@ export default function Bottom() {
         left: 0,
         right: 0,
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundImage: `url(${bottomBackgroundSelected})`,
+        backgroundImage: enableBottomBackground ? `url(${bottomBackgroundSelected})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: 0,
@@ -127,7 +136,9 @@ export default function Bottom() {
                   backgroundColor: darkMode
                     ? bottomActiveDarkColor
                     : bottomActiveLightColor,
-                  color: darkMode ? bottomActiveFontDarkColor : bottomActiveFontLightColor,
+                  color: darkMode
+                    ? bottomActiveFontDarkColor
+                    : bottomActiveFontLightColor,
                   "& .MuiBottomNavigationAction-label": {
                     fontSize: bottomFontSize,
                   },

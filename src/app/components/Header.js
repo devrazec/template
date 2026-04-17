@@ -71,6 +71,15 @@ export default function Header() {
     setLogoSubTitleDarkColor,
     logoSubTitleLightColor,
     setLogoSubTitleLightColor,
+
+    enableLogoBackground,
+    setEnableLogoBackground,
+    enableMenuBackground,
+    setEnableMenuBackground,
+    enableBottomBackground,
+    setEnableBottomBackground,
+    enableHeaderBackground,
+    setEnableHeaderBackground,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
@@ -97,12 +106,12 @@ export default function Header() {
         width: { xs: "100%", md: `calc(100% - ${DRAWER_WIDTH}px)` },
       }}
     >
-      <Toolbar 
-        sx={{ 
-          padding: 0, 
-          height: 70, 
+      <Toolbar
+        sx={{
+          padding: 0,
+          height: 70,
           display: "flex",
-          backgroundImage: `url(${headerBackgroundSelected})`,
+          backgroundImage: enableHeaderBackground ? `url(${headerBackgroundSelected})` : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -113,7 +122,7 @@ export default function Header() {
             display: { xs: "flex", md: "none" },
             alignItems: "center",
             height: 70,
-            backgroundImage: `url(${logoBackgroundSelected})`,
+            backgroundImage: enableLogoBackground ? `url(${logoBackgroundSelected})` : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
             paddingY: 0,
