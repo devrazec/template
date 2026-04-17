@@ -19,7 +19,7 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import Paper from "@mui/material/Paper";
 
-export default function Top() {
+export default function Header() {
   const {
     dbProduct,
     darkMode,
@@ -35,6 +35,15 @@ export default function Top() {
     setSelectedRange,
     menuItem,
     setMenuItem,
+
+    headerFontDarkColor,
+    setHeaderFontDarkColor,
+    headerFontLightColor,
+    setHeaderFontLightColor,
+    headerFontSize,
+    setHeaderFontSize,
+    headerBackgroundSelected,
+    setHeaderBackgroundSelected,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
