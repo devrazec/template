@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { GlobalContext } from '../context/GlobalContext';
 
 export default function Loading() {
+  
   const { isLoading } = useContext(GlobalContext);
 
   return (

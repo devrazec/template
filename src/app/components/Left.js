@@ -1,5 +1,8 @@
 'use client';
 
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Drawer from '@mui/material/Drawer';
@@ -10,24 +13,28 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Divider from '@mui/material/Divider';
-import HomeIcon from '@mui/icons-material/Home';
-import MicIcon from '@mui/icons-material/Mic';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import EditIcon from '@mui/icons-material/Edit';
-import HeadphonesIcon from '@mui/icons-material/Headphones';
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import TodayOutlinedIcon from '@mui/icons-material/TodayOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 
 const DRAWER_WIDTH = 240;
 
-const mainNavItems = [
-    { text: 'Home', icon: <HomeIcon />, href: '/' },
-];
-
 export default function Left() {
+
+      const {
+    dbProduct,
+    darkMode,
+    setDarkMode,
+    mobileDevice,
+    selectedDate,
+    setSelectedDate,
+    selectedMonth,
+    setSelectedMonth,
+    selectedYear,
+    setSelectedYear,
+    selectedRange,
+    setSelectedRange,
+    menuItem,
+    setMenuItem,
+  } = useContext(GlobalContext);
+
     const pathname = usePathname();
 
     return (
@@ -45,7 +52,7 @@ export default function Left() {
         >
             <Toolbar />
             <List>
-                {mainNavItems.map(({ text, icon, href }) => (
+                {menuItem.map(({ text, icon, href }) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             component={Link}
