@@ -5,7 +5,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import Layout from "../../components/Layout";
 import { useLoading } from "../../hooks/useLoading";
 
-export default function SettingsPage() {
+export default function ContactPage() {
   const {
     dbProduct,
     darkMode,
