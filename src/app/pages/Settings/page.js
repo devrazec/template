@@ -241,6 +241,25 @@ export default function SettingsPage() {
     setEnableBottomBackground,
     enableBottomItem,
     setEnableBottomItem,
+    menuFontDarkColor,
+    setMenuFontDarkColor,
+    menuFontLightColor,
+    setMenuFontLightColor,
+    menuFontSize,
+    setMenuFontSize,
+    menuActiveDarkColor,
+    setMenuActiveDarkColor,
+    menuActiveLightColor,
+    setMenuActiveLightColor,
+    menuActiveFontDarkColor,
+    setMenuActiveFontDarkColor,
+    menuActiveFontLightColor,
+    setMenuActiveFontLightColor,
+    menuBackgroundSelected,
+    setMenuBackgroundSelected,
+    enableMenuItem, setEnableMenuItem,
+    enableMenuBackground,
+    setEnableMenuBackground,
   } = useContext(GlobalContext);
 
   const { showLoading, hideLoading } = useLoading();
@@ -581,6 +600,7 @@ export default function SettingsPage() {
               height: 70,
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
               paddingLeft: 16,
               gap: 14,
               backgroundImage:
@@ -907,6 +927,212 @@ export default function SettingsPage() {
             label="Light Mode Font Color"
             value={bottomActiveFontLightColor}
             onChange={setBottomActiveFontLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+        </SettingsCard>
+
+        {/* ══ MENU SETTINGS ════════════════════════════════════════════════ */}
+        <Typography
+          variant="h6"
+          style={{ fontWeight: 700, color: textColor, marginBottom: 18, marginTop: 8 }}
+        >
+          Menu Settings
+        </Typography>
+
+        {/* ── Menu Preview ── */}
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Menu Preview</SectionTitle>
+          <div
+            style={{
+              borderRadius: 10,
+              overflow: "hidden",
+              backgroundImage:
+                enableMenuBackground && menuBackgroundSelected
+                  ? `url(${menuBackgroundSelected})`
+                  : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundColor: enableMenuBackground
+                ? undefined
+                : darkMode
+                ? "#374151"
+                : "#f9fafb",
+              border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
+              padding: "6px 0",
+            }}
+          >
+            {enableMenuItem && [
+              { label: "Home", Icon: HomeIcon },
+              { label: "Account", Icon: AccountCircleOutlinedIcon },
+              { label: "Settings", Icon: CalendarTodayOutlinedIcon },
+              { label: "Contact", Icon: EmailOutlinedIcon },
+            ].map(({ label, Icon }, i) => (
+              <div
+                key={label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  padding: "7px 16px",
+                  backgroundColor:
+                    i === 2
+                      ? darkMode
+                        ? menuActiveDarkColor
+                        : menuActiveLightColor
+                      : "transparent",
+                }}
+              >
+                <Icon
+                  style={{
+                    fontSize: 20,
+                    color:
+                      i === 2
+                        ? darkMode
+                          ? menuActiveFontDarkColor
+                          : menuActiveFontLightColor
+                        : darkMode
+                        ? menuFontDarkColor
+                        : menuFontLightColor,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: menuFontSize,
+                    color:
+                      i === 2
+                        ? darkMode
+                          ? menuActiveFontDarkColor
+                          : menuActiveFontLightColor
+                        : darkMode
+                        ? menuFontDarkColor
+                        : menuFontLightColor,
+                  }}
+                >
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </SettingsCard>
+
+        {/* ── Menu Background ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: enableMenuBackground ? 12 : 0,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Menu Background
+            </Typography>
+            <Switch
+              checked={!!enableMenuBackground}
+              onChange={(e) => setEnableMenuBackground(e.target.checked)}
+              size="small"
+            />
+          </div>
+          {enableMenuBackground && (
+            <ImageStrip
+              images={menuBackgroundList}
+              selected={menuBackgroundSelected}
+              onSelect={setMenuBackgroundSelected}
+              thumbSize={80}
+            />
+          )}
+        </SettingsCard>
+
+        {/* ── Menu Font ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 14,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Menu Item
+            </Typography>
+            <Switch
+              checked={!!enableMenuItem}
+              onChange={(e) => setEnableMenuItem(e.target.checked)}
+              size="small"
+            />
+          </div>
+          <RowLabel darkMode={darkMode}>Font Size: {menuFontSize}px</RowLabel>
+          <Slider
+            min={8}
+            max={28}
+            step={1}
+            value={menuFontSize}
+            onChange={(_, val) => setMenuFontSize(val)}
+            sx={{ color: "#3498db", mb: 1 }}
+          />
+          <ColorSelector
+            label="Dark Mode Color"
+            value={menuFontDarkColor}
+            onChange={setMenuFontDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Color"
+            value={menuFontLightColor}
+            onChange={setMenuFontLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+        </SettingsCard>
+
+        {/* ── Menu Active Item ── */}
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Menu Active Item</SectionTitle>
+          <ColorSelector
+            label="Dark Mode Background"
+            value={menuActiveDarkColor}
+            onChange={setMenuActiveDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Background"
+            value={menuActiveLightColor}
+            onChange={setMenuActiveLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Dark Mode Font Color"
+            value={menuActiveFontDarkColor}
+            onChange={setMenuActiveFontDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Font Color"
+            value={menuActiveFontLightColor}
+            onChange={setMenuActiveFontLightColor}
             colorList={colorList}
             darkMode={darkMode}
           />

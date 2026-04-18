@@ -49,6 +49,7 @@ export default function Left() {
     setMenuActiveFontDarkColor,
     menuActiveFontLightColor,
     setMenuActiveFontLightColor,
+    enableMenuItem, setEnableMenuItem,
     menuBackgroundSelected,
     setMenuBackgroundSelected,
 
@@ -169,48 +170,50 @@ export default function Left() {
         </Box>
       </Box>
 
-      <List>
-        {menuItem.map(({ text, icon, href }) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              component={Link}
-              href={href}
-              selected={pathname === href}
-              sx={{
-                color: darkMode ? menuFontDarkColor : menuFontLightColor,
-                "& .MuiListItemIcon-root": {
+      {enableMenuItem && (
+        <List>
+          {menuItem.map(({ text, icon, href }) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                component={Link}
+                href={href}
+                selected={pathname === href}
+                sx={{
                   color: darkMode ? menuFontDarkColor : menuFontLightColor,
-                },
-                "& .MuiListItemText-primary": {
-                  fontSize: menuFontSize,
-                },
-                "&.Mui-selected": {
-                  backgroundColor: darkMode
-                    ? menuActiveDarkColor
-                    : menuActiveLightColor,
-                  color: darkMode
-                    ? menuActiveFontDarkColor
-                    : menuActiveFontLightColor,
                   "& .MuiListItemIcon-root": {
-                    color: darkMode
-                      ? menuActiveFontDarkColor
-                      : menuActiveFontLightColor,
+                    color: darkMode ? menuFontDarkColor : menuFontLightColor,
                   },
-                  "&:hover": {
+                  "& .MuiListItemText-primary": {
+                    fontSize: menuFontSize,
+                  },
+                  "&.Mui-selected": {
                     backgroundColor: darkMode
                       ? menuActiveDarkColor
                       : menuActiveLightColor,
-                    opacity: 0.9,
+                    color: darkMode
+                      ? menuActiveFontDarkColor
+                      : menuActiveFontLightColor,
+                    "& .MuiListItemIcon-root": {
+                      color: darkMode
+                        ? menuActiveFontDarkColor
+                        : menuActiveFontLightColor,
+                    },
+                    "&:hover": {
+                      backgroundColor: darkMode
+                        ? menuActiveDarkColor
+                        : menuActiveLightColor,
+                      opacity: 0.9,
+                    },
                   },
-                },
-              }}
-            >
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+                }}
+              >
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Drawer>
   );
 }

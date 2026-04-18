@@ -4,6 +4,7 @@ import { createContext, useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 
 import jsonProduct from '../data/product.json';
+import jsonSettings from '../data/settings.json';
 
 import HomeIcon from '@mui/icons-material/Home';
 import MicIcon from '@mui/icons-material/Mic';
@@ -30,6 +31,7 @@ export function GlobalProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [dbProduct, setDbProduct] = useState(jsonProduct);
+  const [dbSettings, setDbSettings] = useState(jsonSettings);
 
   const [selectedMonth, setSelectedMonth] = useState(dayjs());
   const [selectedWeek, setSelectedWeek] = useState(dayjs());
@@ -394,56 +396,55 @@ export function GlobalProvider({ children }) {
     { key: '140.jpg', source: '/headerbottom/140.jpg' },
   ]);
 
-  const [headerTitle, setHeaderTitle] = useState('');
-  const [headerFontDarkColor, setHeaderFontDarkColor] = useState('#000000');
-  const [headerFontLightColor, setHeaderFontLightColor] = useState('#ffffff');
-  const [headerFontSize, setHeaderFontSize] = useState(20);
-  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState('/headerbottom/61.jpg');
+  const [headerTitle, setHeaderTitle] = useState(jsonSettings.headerTitle || 'Header Title');
+  const [headerFontDarkColor, setHeaderFontDarkColor] = useState(jsonSettings.headerFontDarkColor || '#000000');
+  const [headerFontLightColor, setHeaderFontLightColor] = useState(jsonSettings.headerFontLightColor || '#ffffff');
+  const [headerFontSize, setHeaderFontSize] = useState(jsonSettings.headerFontSize || 20);
+  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState(jsonSettings.headerBackgroundSelected || '/headerbottom/61.jpg');
 
-  const [bottomFontDarkColor, setBottomFontDarkColor] = useState('#000000');
-  const [bottomFontLightColor, setBottomFontLightColor] = useState('#ffffff');
-  const [bottomFontSize, setBottomFontSize] = useState(14);
-  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState('#490fe9');
-  const [bottomActiveLightColor, setBottomActiveLightColor] = useState('#ae4040');
-  const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState('#000000');
-  const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState('#ffffff');
-  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState('/headerbottom/61.jpg');
-  const [enableBottomItem, setEnableBottomItem] = useState(true);
-  const [enableBottomBackground, setEnableBottomBackground] = useState(true);
+  const [bottomFontDarkColor, setBottomFontDarkColor] = useState(jsonSettings.bottomFontDarkColor || '#000000');
+  const [bottomFontLightColor, setBottomFontLightColor] = useState(jsonSettings.bottomFontLightColor || '#ffffff');
+  const [bottomFontSize, setBottomFontSize] = useState(jsonSettings.bottomFontSize || 14);
+  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState(jsonSettings.bottomActiveDarkColor || '#490fe9');
+  const [bottomActiveLightColor, setBottomActiveLightColor] = useState(jsonSettings.bottomActiveLightColor || '#ae4040');
+  const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState(jsonSettings.bottomActiveFontDarkColor || '#000000');
+  const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState(jsonSettings.bottomActiveFontLightColor || '#ffffff');
+  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState(jsonSettings.bottomBackgroundSelected || '/headerbottom/61.jpg');
+  const [enableBottomItem, setEnableBottomItem] = useState(jsonSettings.enableBottomItem || true);
+  const [enableBottomBackground, setEnableBottomBackground] = useState(jsonSettings.enableBottomBackground || true);
 
-  const [menuFontDarkColor, setMenuFontDarkColor] = useState('#000000');
-  const [menuFontLightColor, setMenuFontLightColor] = useState('#ffffff');
-  const [menuFontSize, setMenuFontSize] = useState(20);
-  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState('#3c2791');
-  const [menuActiveLightColor, setMenuActiveLightColor] = useState('#733131');
-  const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState('#000000');
-  const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState('#ffffff');
-  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState('/menu/50.jpg');
-  const [enableMenuItem, setEnableMenuItem] = useState(true);
-  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
+  const [menuFontDarkColor, setMenuFontDarkColor] = useState(jsonSettings.menuFontDarkColor || '#000000');
+  const [menuFontLightColor, setMenuFontLightColor] = useState(jsonSettings.menuFontLightColor || '#ffffff');
+  const [menuFontSize, setMenuFontSize] = useState(jsonSettings.menuFontSize || 20);
+  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState(jsonSettings.menuActiveDarkColor || '#3c2791');
+  const [menuActiveLightColor, setMenuActiveLightColor] = useState(jsonSettings.menuActiveLightColor || '#733131');
+  const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState(jsonSettings.menuActiveFontDarkColor || '#000000');
+  const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState(jsonSettings.menuActiveFontLightColor || '#ffffff');
+  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState(jsonSettings.menuBackgroundSelected || '/menu/50.jpg');
+  const [enableMenuItem, setEnableMenuItem] = useState(jsonSettings.enableMenuItem || true);
+  const [enableMenuBackground, setEnableMenuBackground] = useState(jsonSettings.enableMenuBackground || true);
 
-  const [logoSelected, setLogoSelected] = useState('/logo/1.png');
-  const [logoSize, setLogoSize] = useState({ width: 52, height: 52 });
-  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('/menu/50.jpg');
+  const [logoSelected, setLogoSelected] = useState(jsonSettings.logoSelected || '/logo/1.png');
+  const [logoSize, setLogoSize] = useState(jsonSettings.logoSize || { width: 52, height: 52 });
+  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState(jsonSettings.logoBackgroundSelected || '/menu/50.jpg');
 
-  const [logoTitle, setLogoTitle] = useState('Snack Bar');
-  const [logoTitleSize, setLogoTitleSize] = useState(22);
-  const [logoTitleDarkColor, setLogoTitleDarkColor] = useState('#000000');
-  const [logoTitleLightColor, setLogoTitleLightColor] = useState('#ffffff');
+  const [logoTitle, setLogoTitle] = useState(jsonSettings.logoTitle || 'Logo Title');
+  const [logoTitleSize, setLogoTitleSize] = useState(jsonSettings.logoTitleSize || 22);
+  const [logoTitleDarkColor, setLogoTitleDarkColor] = useState(jsonSettings.logoTitleDarkColor || '#000000');
+  const [logoTitleLightColor, setLogoTitleLightColor] = useState(jsonSettings.logoTitleLightColor || '#ffffff');
 
-  const [logoSubTitle, setLogoSubTitle] = useState('+351 916 095 144');
-  const [logoSubTitleSize, setLogoSubTitleSize] = useState(14);
-  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState('#000000');
-  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState('#ffffff');
+  const [logoSubTitle, setLogoSubTitle] = useState(jsonSettings.logoSubTitle || 'Logo SubTitle');
+  const [logoSubTitleSize, setLogoSubTitleSize] = useState(jsonSettings.logoSubTitleSize || 14);
+  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState(jsonSettings.logoSubTitleDarkColor || '#000000');
+  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState(jsonSettings.logoSubTitleLightColor || '#ffffff');
 
-  const [enableLogo, setEnableLogo] = useState(true);
-  const [enableLogoTitle, setEnableLogoTitle] = useState(true);
-  const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(true);
-  const [enableLogoBackground, setEnableLogoBackground] = useState(true);
+  const [enableLogo, setEnableLogo] = useState(jsonSettings.enableLogo || true);
+  const [enableLogoTitle, setEnableLogoTitle] = useState(jsonSettings.enableLogoTitle || true);
+  const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(jsonSettings.enableLogoSubTitle || true);
+  const [enableLogoBackground, setEnableLogoBackground] = useState(jsonSettings.enableLogoBackground || true);
 
-  const [enableHeaderTitle, setEnableHeaderTitle] = useState(true);
-  const [enableHeaderBackground, setEnableHeaderBackground] = useState(true);
-
+  const [enableHeaderTitle, setEnableHeaderTitle] = useState(jsonSettings.enableHeaderTitle || true);
+  const [enableHeaderBackground, setEnableHeaderBackground] = useState(jsonSettings.enableHeaderBackground || true);
 
   return (
     <GlobalContext.Provider
@@ -457,6 +458,8 @@ export function GlobalProvider({ children }) {
 
         dbProduct,
         setDbProduct,
+
+        dbSettings, setDbSettings,
 
         selectedDate,
         setSelectedDate,
