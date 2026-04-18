@@ -22,8 +22,8 @@ const jsonData = XLSX.utils.sheet_to_json(sheet);
 
 // Prepare insert
 const insert = db.prepare(`
-  INSERT INTO product (id, name, description, price, image, active)
-  VALUES (@id, @name, @description, @price, @image, @active)
+  INSERT INTO product (id, name, description, category, image, price, rating, active)
+  VALUES (@id, @name, @description, @category, @image, @price, @rating, @active)
 `);
 
 // Prevent double seeding

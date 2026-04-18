@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS product (
   category TEXT,
   image TEXT,
   price REAL,
+  rating REAL,
   active TEXT
 );
 
