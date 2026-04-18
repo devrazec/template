@@ -77,8 +77,15 @@ export default function Left() {
     logoSubTitleLightColor,
     setLogoSubTitleLightColor,
 
+    enableLogo,
+    setEnableLogo,
+    enableLogoTitle,
+    setEnableLogoTitle,
+    enableLogoSubTitle,
+    setEnableLogoSubTitle,
     enableLogoBackground,
     setEnableLogoBackground,
+
     enableMenuBackground,
     setEnableMenuBackground,
     enableBottomBackground,
@@ -101,7 +108,9 @@ export default function Left() {
           boxSizing: "border-box",
           zIndex: (theme) => theme.zIndex.drawer,
           overflowX: "hidden",
-          backgroundImage: enableMenuBackground ? `url(${menuBackgroundSelected})` : "none",
+          backgroundImage: enableMenuBackground
+            ? `url(${menuBackgroundSelected})`
+            : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
         },
@@ -114,7 +123,9 @@ export default function Left() {
           alignItems: "center",
           width: DRAWER_WIDTH,
           height: 70,
-          backgroundImage: enableLogoBackground ? `url(${logoBackgroundSelected})` : "none",
+          backgroundImage: enableLogoBackground
+            ? `url(${logoBackgroundSelected})`
+            : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
           paddingY: 0,
@@ -122,33 +133,39 @@ export default function Left() {
           paddingLeft: 1,
         }}
       >
-        <Image
-          src={logoSelected}
-          alt="Logo"
-          width={logoSize.width}
-          height={logoSize.height}
-          style={{ objectFit: "contain" }}
-        />
+        {enableLogo && (
+          <Image
+            src={logoSelected}
+            alt="Logo"
+            width={logoSize.width}
+            height={logoSize.height}
+            style={{ objectFit: "contain" }}
+          />
+        )}
         <Box sx={{ display: "flex", flexDirection: "column", ml: 1 }}>
-          <Typography
-            sx={{
-              fontSize: logoTitleSize,
-              fontWeight: "bold",
-              color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
-              lineHeight: 1.2,
-            }}
-          >
-            {logoTitle}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: logoSubTitleSize,
-              color: darkMode ? logoSubTitleLightColor : logoSubTitleDarkColor,
-              lineHeight: 1.2,
-            }}
-          >
-            {logoSubTitle}
-          </Typography>
+          {enableLogoTitle && (
+            <Typography
+              sx={{
+                fontSize: logoTitleSize,
+                fontWeight: "bold",
+                color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
+                lineHeight: 1.2,
+              }}
+            >
+              {logoTitle}
+            </Typography>
+          )}
+          {enableLogoSubTitle && (
+            <Typography
+              sx={{
+                fontSize: logoSubTitleSize,
+                color: darkMode ? logoSubTitleLightColor : logoSubTitleDarkColor,
+                lineHeight: 1.2,
+              }}
+            >
+              {logoSubTitle}
+            </Typography>
+          )}
         </Box>
       </Box>
 

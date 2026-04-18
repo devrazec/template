@@ -38,6 +38,8 @@ export default function Header() {
     menuItem,
     setMenuItem,
 
+    headerTitle,
+    setHeaderTitle,
     headerFontDarkColor,
     setHeaderFontDarkColor,
     headerFontLightColor,
@@ -46,6 +48,10 @@ export default function Header() {
     setHeaderFontSize,
     headerBackgroundSelected,
     setHeaderBackgroundSelected,
+    enableHeaderTitle,
+    setEnableHeaderTitle,
+    enableHeaderBackground,
+    setEnableHeaderBackground,
 
     logoSelected,
     setLogoSelected,
@@ -72,14 +78,19 @@ export default function Header() {
     logoSubTitleLightColor,
     setLogoSubTitleLightColor,
 
+    enableLogo,
+    setEnableLogo,
+    enableLogoTitle,
+    setEnableLogoTitle,
+    enableLogoSubTitle,
+    setEnableLogoSubTitle,
     enableLogoBackground,
     setEnableLogoBackground,
+
     enableMenuBackground,
     setEnableMenuBackground,
     enableBottomBackground,
     setEnableBottomBackground,
-    enableHeaderBackground,
-    setEnableHeaderBackground,
   } = useContext(GlobalContext);
 
   const pathname = usePathname();
@@ -111,57 +122,67 @@ export default function Header() {
           padding: 0,
           height: 70,
           display: "flex",
-          backgroundImage: enableHeaderBackground ? `url(${headerBackgroundSelected})` : "none",
+          backgroundImage: enableHeaderBackground
+            ? `url(${headerBackgroundSelected})`
+            : "none",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         {/* Mobile Logo */}
-        <Box
-          sx={{
-            display: { xs: "flex", md: "none" },
-            alignItems: "center",
-            height: 70,
-            backgroundImage: enableLogoBackground ? `url(${logoBackgroundSelected})` : "none",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            paddingY: 0,
-            paddingRight: 1,
-            paddingLeft: 1,
-            //borderRadius: 1,
-          }}
-        >
-          <Image
-            src={logoSelected}
-            alt="Logo"
-            width={logoSize.width}
-            height={logoSize.height}
-            style={{ objectFit: "contain" }}
-          />
-          <Box sx={{ display: "flex", flexDirection: "column", ml: 1 }}>
-            <Typography
-              sx={{
-                fontSize: logoTitleSize,
-                fontWeight: "bold",
-                color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
-                lineHeight: 1.2,
-              }}
-            >
-              {logoTitle}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: logoSubTitleSize,
-                color: darkMode
-                  ? logoSubTitleLightColor
-                  : logoSubTitleDarkColor,
-                lineHeight: 1.2,
-              }}
-            >
-              {logoSubTitle}
-            </Typography>
+        {enableLogo && (
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              height: 70,
+              backgroundImage: enableLogoBackground
+                ? `url(${logoBackgroundSelected})`
+                : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              paddingY: 0,
+              paddingRight: 1,
+              paddingLeft: 1,
+              //borderRadius: 1,
+            }}
+          >
+            <Image
+              src={logoSelected}
+              alt="Logo"
+              width={logoSize.width}
+              height={logoSize.height}
+              style={{ objectFit: "contain" }}
+            />
+            <Box sx={{ display: "flex", flexDirection: "column", ml: 1 }}>
+              {enableLogoTitle && (
+                <Typography
+                  sx={{
+                    fontSize: logoTitleSize,
+                    fontWeight: "bold",
+                    color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {logoTitle}
+                </Typography>
+              )}
+              {enableLogoSubTitle && (
+                <Typography
+                  sx={{
+                    fontSize: logoSubTitleSize,
+                    color: darkMode
+                      ? logoSubTitleLightColor
+                      : logoSubTitleDarkColor,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {logoSubTitle}
+                </Typography>
+              )}
+            </Box>
           </Box>
-        </Box>
+        )}
 
         {/* Block 2: Header Content - Flexible width */}
         <Box
@@ -183,9 +204,19 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            {/* <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
-              {pathname === "/" ? "Home" : pathname.replace("/pages/", "")}
-            </Typography> */}
+            {enableHeaderTitle && (
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: headerFontSize,
+                  color: darkMode ? headerFontLightColor : headerFontDarkColor,
+                }}
+              >
+                {headerTitle || (pathname === "/" ? "Home" : pathname.replace("/pages/", ""))}
+              </Typography>
+            )}
           </Box>
 
           <IconButton color="primary" onClick={() => setDarkMode(!darkMode)}>

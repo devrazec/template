@@ -394,6 +394,7 @@ export function GlobalProvider({ children }) {
     { key: '140.jpg', source: '/headerbottom/140.jpg' },
   ]);
 
+  const [headerTitle, setHeaderTitle] = useState('');
   const [headerFontDarkColor, setHeaderFontDarkColor] = useState('#000000');
   const [headerFontLightColor, setHeaderFontLightColor] = useState('#ffffff');
   const [headerFontSize, setHeaderFontSize] = useState(20);
@@ -431,9 +432,15 @@ export function GlobalProvider({ children }) {
   const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState('#000000');
   const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState('#ffffff');
 
+  const [enableLogo, setEnableLogo] = useState(true);
+  const [enableLogoTitle, setEnableLogoTitle] = useState(true);
+  const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(true);
   const [enableLogoBackground, setEnableLogoBackground] = useState(true);
+
   const [enableMenuBackground, setEnableMenuBackground] = useState(true);
   const [enableBottomBackground, setEnableBottomBackground] = useState(true);
+
+  const [enableHeaderTitle, setEnableHeaderTitle] = useState(true);
   const [enableHeaderBackground, setEnableHeaderBackground] = useState(true);
 
   return (
@@ -465,10 +472,13 @@ export function GlobalProvider({ children }) {
         menuBackgroundList, setMenuBackgroundList,
         headerBottomBackgroundList, setHeaderBottomBackgroundList,
 
+        headerTitle, setHeaderTitle,
         headerFontDarkColor, setHeaderFontDarkColor,
         headerFontLightColor, setHeaderFontLightColor,
         headerFontSize, setHeaderFontSize,
         headerBackgroundSelected, setHeaderBackgroundSelected,
+        enableHeaderTitle, setEnableHeaderTitle,
+        enableHeaderBackground, setEnableHeaderBackground,
 
         bottomFontDarkColor, setBottomFontDarkColor,
         bottomFontLightColor, setBottomFontLightColor,
@@ -502,10 +512,13 @@ export function GlobalProvider({ children }) {
         logoSubTitleDarkColor, setLogoSubTitleDarkColor,
         logoSubTitleLightColor, setLogoSubTitleLightColor,
 
+        enableLogo, setEnableLogo,
+        enableLogoTitle, setEnableLogoTitle,
+        enableLogoSubTitle, setEnableLogoSubTitle,
         enableLogoBackground, setEnableLogoBackground,
+
         enableMenuBackground, setEnableMenuBackground,
         enableBottomBackground, setEnableBottomBackground,
-        enableHeaderBackground, setEnableHeaderBackground,
 
       }}
     >

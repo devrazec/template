@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import Layout from "../../components/Layout";
 import { useLoading } from "../../hooks/useLoading";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
@@ -82,9 +83,13 @@ function ColorSelector({ label, value, onChange, colorList, darkMode }) {
             padding: "1px 6px",
             borderRadius: 4,
             background: value,
-            color: value === "#ffffff" || value === "#f5f5f5" || value === "#ecf0f1" || value === "#bdc3c7"
-              ? "#333"
-              : "#fff",
+            color:
+              value === "#ffffff" ||
+              value === "#f5f5f5" ||
+              value === "#ecf0f1" ||
+              value === "#bdc3c7"
+                ? "#333"
+                : "#fff",
             fontSize: 11,
           }}
         >
@@ -106,8 +111,8 @@ function ColorSelector({ label, value, onChange, colorList, darkMode }) {
                 value === c.key
                   ? "3px solid #3498db"
                   : darkMode
-                  ? "2px solid #374151"
-                  : "2px solid #e5e7eb",
+                    ? "2px solid #374151"
+                    : "2px solid #e5e7eb",
               cursor: "pointer",
               boxSizing: "border-box",
               flexShrink: 0,
@@ -169,6 +174,7 @@ export default function SettingsPage() {
     colorList,
     logoList,
     menuBackgroundList,
+    headerBottomBackgroundList,
     logoSelected,
     setLogoSelected,
     logoSize,
@@ -191,11 +197,30 @@ export default function SettingsPage() {
     setLogoSubTitleDarkColor,
     logoSubTitleLightColor,
     setLogoSubTitleLightColor,
+    enableLogo,
+    setEnableLogo,
+    enableLogoTitle,
+    setEnableLogoTitle,
+    enableLogoSubTitle,
+    setEnableLogoSubTitle,
     enableLogoBackground,
     setEnableLogoBackground,
+    headerFontDarkColor,
+    setHeaderFontDarkColor,
+    headerFontLightColor,
+    setHeaderFontLightColor,
+    headerFontSize,
+    setHeaderFontSize,
+    headerBackgroundSelected,
+    setHeaderBackgroundSelected,
+    enableHeaderTitle,
+    setEnableHeaderTitle,
+    enableHeaderBackground,
+    setEnableHeaderBackground,
   } = useContext(GlobalContext);
 
   const { showLoading, hideLoading } = useLoading();
+  const pathname = usePathname();
 
   useEffect(() => {
     showLoading();
@@ -225,7 +250,7 @@ export default function SettingsPage() {
 
         {/* ── Preview ── */}
         <SettingsCard darkMode={darkMode}>
-          <SectionTitle darkMode={darkMode}>Preview</SectionTitle>
+          <SectionTitle darkMode={darkMode}>Logo Preview</SectionTitle>
           <div
             style={{
               borderRadius: 10,
@@ -244,12 +269,12 @@ export default function SettingsPage() {
               backgroundColor: enableLogoBackground
                 ? undefined
                 : darkMode
-                ? "#374151"
-                : "#f9fafb",
+                  ? "#374151"
+                  : "#f9fafb",
               border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
             }}
           >
-            {logoSelected && (
+            {enableLogo && logoSelected && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={logoSelected}
@@ -263,49 +288,72 @@ export default function SettingsPage() {
               />
             )}
             <div>
-              <div
-                style={{
-                  fontSize: logoTitleSize,
-                  fontWeight: 700,
-                  color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
-                  lineHeight: 1.2,
-                }}
-              >
-                {logoTitle}
-              </div>
-              <div
-                style={{
-                  fontSize: logoSubTitleSize,
-                  color: darkMode
-                    ? logoSubTitleLightColor
-                    : logoSubTitleDarkColor,
-                  marginTop: 4,
-                }}
-              >
-                {logoSubTitle}
-              </div>
+              {enableLogoTitle && (
+                <div
+                  style={{
+                    fontSize: logoTitleSize,
+                    fontWeight: 700,
+                    color: darkMode ? logoTitleLightColor : logoTitleDarkColor,
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {logoTitle}
+                </div>
+              )}
+              {enableLogoSubTitle && (
+                <div
+                  style={{
+                    fontSize: logoSubTitleSize,
+                    color: darkMode
+                      ? logoSubTitleLightColor
+                      : logoSubTitleDarkColor,
+                    marginTop: 4,
+                  }}
+                >
+                  {logoSubTitle}
+                </div>
+              )}
             </div>
           </div>
         </SettingsCard>
 
-        {/* ── Logo Image Selector ── */}
+        {/* ── Logo Image + Size ── */}
         <SettingsCard darkMode={darkMode}>
-          <SectionTitle darkMode={darkMode}>Logo Image</SectionTitle>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 12,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Logo Image
+            </Typography>
+            <Switch
+              checked={!!enableLogo}
+              onChange={(e) => setEnableLogo(e.target.checked)}
+              size="small"
+            />
+          </div>
           <ImageStrip
             images={logoList}
             selected={logoSelected}
             onSelect={setLogoSelected}
             thumbSize={72}
           />
-        </SettingsCard>
-
-        {/* ── Logo Size ── */}
-        <SettingsCard darkMode={darkMode}>
-          <SectionTitle darkMode={darkMode}>Logo Size</SectionTitle>
-          <RowLabel darkMode={darkMode}>Size: {logoSize.width}px</RowLabel>
+          <RowLabel darkMode={darkMode} style={{ marginTop: 14 }}>Logo Size: {logoSize.width}px</RowLabel>
           <Slider
             min={24}
-            max={120}
+            max={82}
             step={2}
             value={logoSize.width}
             onChange={(_, val) => setLogoSize({ width: val, height: val })}
@@ -352,7 +400,31 @@ export default function SettingsPage() {
 
         {/* ── Logo Title ── */}
         <SettingsCard darkMode={darkMode}>
-          <SectionTitle darkMode={darkMode}>Logo Title</SectionTitle>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 14,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Logo Title
+            </Typography>
+            <Switch
+              checked={!!enableLogoTitle}
+              onChange={(e) => setEnableLogoTitle(e.target.checked)}
+              size="small"
+            />
+          </div>
           <TextField
             label="Title Text"
             value={logoTitle}
@@ -368,12 +440,10 @@ export default function SettingsPage() {
               },
             }}
           />
-          <RowLabel darkMode={darkMode}>
-            Font Size: {logoTitleSize}px
-          </RowLabel>
+          <RowLabel darkMode={darkMode}>Font Size: {logoTitleSize}px</RowLabel>
           <Slider
             min={10}
-            max={48}
+            max={41}
             step={1}
             value={logoTitleSize}
             onChange={(_, val) => setLogoTitleSize(val)}
@@ -397,7 +467,31 @@ export default function SettingsPage() {
 
         {/* ── Logo Subtitle ── */}
         <SettingsCard darkMode={darkMode}>
-          <SectionTitle darkMode={darkMode}>Logo Subtitle</SectionTitle>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 14,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Logo Subtitle
+            </Typography>
+            <Switch
+              checked={!!enableLogoSubTitle}
+              onChange={(e) => setEnableLogoSubTitle(e.target.checked)}
+              size="small"
+            />
+          </div>
           <TextField
             label="Subtitle Text"
             value={logoSubTitle}
@@ -418,7 +512,7 @@ export default function SettingsPage() {
           </RowLabel>
           <Slider
             min={10}
-            max={36}
+            max={34}
             step={1}
             value={logoSubTitleSize}
             onChange={(_, val) => setLogoSubTitleSize(val)}
@@ -435,6 +529,148 @@ export default function SettingsPage() {
             label="Light Mode Color"
             value={logoSubTitleLightColor}
             onChange={setLogoSubTitleLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+        </SettingsCard>
+
+        {/* ══ HEADER SETTINGS ══════════════════════════════════════════════ */}
+        <Typography
+          variant="h6"
+          style={{
+            fontWeight: 700,
+            color: textColor,
+            marginBottom: 18,
+            marginTop: 8,
+          }}
+        >
+          Header Settings
+        </Typography>
+
+        {/* ── Header Preview ── */}
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Header Preview</SectionTitle>
+          <div
+            style={{
+              borderRadius: 10,
+              overflow: "hidden",
+              height: 70,
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: 16,
+              gap: 14,
+              backgroundImage:
+                enableHeaderBackground && headerBackgroundSelected
+                  ? `url(${headerBackgroundSelected})`
+                  : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundColor: enableHeaderBackground
+                ? undefined
+                : darkMode
+                  ? "#374151"
+                  : "#f9fafb",
+              border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
+            }}
+          >
+            {enableHeaderTitle && (
+              <span
+                style={{
+                  fontSize: headerFontSize,
+                  fontWeight: 700,
+                  color: darkMode ? headerFontLightColor : headerFontDarkColor,
+                }}
+              >
+                {pathname === "/" ? "Home" : pathname.replace("/pages/", "")}
+              </span>
+            )}
+          </div>
+        </SettingsCard>
+
+        {/* ── Header Background ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: enableHeaderBackground ? 12 : 0,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Header Background
+            </Typography>
+            <Switch
+              checked={!!enableHeaderBackground}
+              onChange={(e) => setEnableHeaderBackground(e.target.checked)}
+              size="small"
+            />
+          </div>
+          {enableHeaderBackground && (
+            <ImageStrip
+              images={headerBottomBackgroundList}
+              selected={headerBackgroundSelected}
+              onSelect={setHeaderBackgroundSelected}
+              thumbSize={80}
+            />
+          )}
+        </SettingsCard>
+
+        {/* ── Header Font ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 14,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Header Title
+            </Typography>
+            <Switch
+              checked={!!enableHeaderTitle}
+              onChange={(e) => setEnableHeaderTitle(e.target.checked)}
+              size="small"
+            />
+          </div>
+          <RowLabel darkMode={darkMode}>Font Size: {headerFontSize}px</RowLabel>
+          <Slider
+            min={10}
+            max={47}
+            step={1}
+            value={headerFontSize}
+            onChange={(_, val) => setHeaderFontSize(val)}
+            sx={{ color: "#3498db", mb: 1 }}
+          />
+          <ColorSelector
+            label="Dark Mode Color"
+            value={headerFontDarkColor}
+            onChange={setHeaderFontDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Color"
+            value={headerFontLightColor}
+            onChange={setHeaderFontLightColor}
             colorList={colorList}
             darkMode={darkMode}
           />
