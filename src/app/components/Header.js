@@ -106,12 +106,13 @@ export default function Header() {
     <AppBar
       position="fixed"
       elevation={0}
+      style={{
+        backgroundColor: enableHeaderBackground ? "transparent" : "rgba(0,0,0,0.15)",
+        backdropFilter: enableHeaderBackground ? "none" : "blur(12px)",
+        WebkitBackdropFilter: enableHeaderBackground ? "none" : "blur(12px)",
+      }}
       sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        //backgroundColor: "#00a76f1f",
-        //backdropFilter: "blur(4px)",
-        //borderBottom: "1px solid",
-        //borderColor: "divider",
+        zIndex: (theme) => theme.zIndex.drawer,
         left: { xs: 0, md: DRAWER_WIDTH },
         right: 0,
         width: { xs: "100%", md: `calc(100% - ${DRAWER_WIDTH}px)` },
@@ -214,12 +215,18 @@ export default function Header() {
                   color: darkMode ? headerFontLightColor : headerFontDarkColor,
                 }}
               >
-                {headerTitle || (pathname === "/" ? "Home" : pathname.replace("/pages/", ""))}
+                {headerTitle ||
+                  (pathname === "/" ? "Home" : pathname.replace("/pages/", ""))}
               </Typography>
             )}
           </Box>
 
-          <IconButton sx={{ color: darkMode ? headerFontLightColor : headerFontDarkColor }} onClick={() => setDarkMode(!darkMode)}>
+          <IconButton
+            sx={{
+              color: darkMode ? headerFontLightColor : headerFontDarkColor,
+            }}
+            onClick={() => setDarkMode(!darkMode)}
+          >
             {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
         </Box>
