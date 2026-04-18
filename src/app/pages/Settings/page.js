@@ -391,7 +391,7 @@ export default function SettingsPage() {
                       textOverflow: "ellipsis",
                     }}
                   >
-                    
+                    {/* {theme.key} */}
                   </div>
                 </div>
               );
