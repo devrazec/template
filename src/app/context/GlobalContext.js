@@ -408,6 +408,8 @@ export function GlobalProvider({ children }) {
   const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState('#000000');
   const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState('#ffffff');
   const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState('/headerbottom/61.jpg');
+  const [enableBottomItem, setEnableBottomItem] = useState(true);
+  const [enableBottomBackground, setEnableBottomBackground] = useState(true);
 
   const [menuFontDarkColor, setMenuFontDarkColor] = useState('#000000');
   const [menuFontLightColor, setMenuFontLightColor] = useState('#ffffff');
@@ -437,11 +439,10 @@ export function GlobalProvider({ children }) {
   const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(true);
   const [enableLogoBackground, setEnableLogoBackground] = useState(true);
 
-  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
-  const [enableBottomBackground, setEnableBottomBackground] = useState(true);
-
   const [enableHeaderTitle, setEnableHeaderTitle] = useState(true);
   const [enableHeaderBackground, setEnableHeaderBackground] = useState(true);
+
+  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
 
   return (
     <GlobalContext.Provider
@@ -488,6 +489,8 @@ export function GlobalProvider({ children }) {
         bottomActiveFontDarkColor, setBottomActiveFontDarkColor,
         bottomActiveFontLightColor, setBottomActiveFontLightColor,
         bottomBackgroundSelected, setBottomBackgroundSelected,
+        enableBottomItem, setEnableBottomItem,
+        enableBottomBackground, setEnableBottomBackground,
 
         menuFontDarkColor, setMenuFontDarkColor,
         menuFontLightColor, setMenuFontLightColor,
@@ -518,7 +521,6 @@ export function GlobalProvider({ children }) {
         enableLogoBackground, setEnableLogoBackground,
 
         enableMenuBackground, setEnableMenuBackground,
-        enableBottomBackground, setEnableBottomBackground,
 
       }}
     >

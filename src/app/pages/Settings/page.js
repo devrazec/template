@@ -10,6 +10,10 @@ import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
+import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
 // ── Reusable sub-components ──────────────────────────────────────────────────
 
@@ -217,6 +221,26 @@ export default function SettingsPage() {
     setEnableHeaderTitle,
     enableHeaderBackground,
     setEnableHeaderBackground,
+    bottomFontDarkColor,
+    setBottomFontDarkColor,
+    bottomFontLightColor,
+    setBottomFontLightColor,
+    bottomFontSize,
+    setBottomFontSize,
+    bottomActiveDarkColor,
+    setBottomActiveDarkColor,
+    bottomActiveLightColor,
+    setBottomActiveLightColor,
+    bottomActiveFontDarkColor,
+    setBottomActiveFontDarkColor,
+    bottomActiveFontLightColor,
+    setBottomActiveFontLightColor,
+    bottomBackgroundSelected,
+    setBottomBackgroundSelected,
+    enableBottomBackground,
+    setEnableBottomBackground,
+    enableBottomItem,
+    setEnableBottomItem,
   } = useContext(GlobalContext);
 
   const { showLoading, hideLoading } = useLoading();
@@ -671,6 +695,218 @@ export default function SettingsPage() {
             label="Light Mode Color"
             value={headerFontLightColor}
             onChange={setHeaderFontLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+        </SettingsCard>
+
+        {/* ══ BOTTOM SETTINGS ══════════════════════════════════════════════ */}
+        <Typography
+          variant="h6"
+          style={{ fontWeight: 700, color: textColor, marginBottom: 18, marginTop: 8 }}
+        >
+          Bottom Settings
+        </Typography>
+
+        {/* ── Bottom Preview ── */}
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Bottom Preview</SectionTitle>
+          <div
+            style={{
+              borderRadius: 10,
+              overflow: "hidden",
+              height: 56,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-around",
+              backgroundImage:
+                enableBottomBackground && bottomBackgroundSelected
+                  ? `url(${bottomBackgroundSelected})`
+                  : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundColor: enableBottomBackground
+                ? undefined
+                : darkMode
+                ? "#374151"
+                : "#f9fafb",
+              border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
+              padding: "0 8px",
+            }}
+          >
+            {enableBottomItem && [
+              { label: "Home", Icon: HomeIcon },
+              { label: "Account", Icon: AccountCircleOutlinedIcon },
+              { label: "Settings", Icon: CalendarTodayOutlinedIcon },
+              { label: "Contact", Icon: EmailOutlinedIcon },
+            ].map(({ label, Icon }, i) => (
+              <div
+                key={label}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: "6px 13px",
+                  borderRadius: 0,
+                  backgroundColor:
+                    i === 2
+                      ? darkMode
+                        ? bottomActiveDarkColor
+                        : bottomActiveLightColor
+                      : "transparent",
+                }}
+              >
+                <Icon
+                  style={{
+                    fontSize: 20,
+                    marginBottom: 2,
+                    color:
+                      i === 2
+                        ? darkMode
+                          ? bottomActiveFontDarkColor
+                          : bottomActiveFontLightColor
+                        : darkMode
+                        ? bottomFontDarkColor
+                        : bottomFontLightColor,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: bottomFontSize,
+                    color:
+                      i === 2
+                        ? darkMode
+                          ? bottomActiveFontDarkColor
+                          : bottomActiveFontLightColor
+                        : darkMode
+                        ? bottomFontDarkColor
+                        : bottomFontLightColor,
+                  }}
+                >
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </SettingsCard>
+
+        {/* ── Bottom Background ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: enableBottomBackground ? 12 : 0,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Bottom Background
+            </Typography>
+            <Switch
+              checked={!!enableBottomBackground}
+              onChange={(e) => setEnableBottomBackground(e.target.checked)}
+              size="small"
+            />
+          </div>
+          {enableBottomBackground && (
+            <ImageStrip
+              images={headerBottomBackgroundList}
+              selected={bottomBackgroundSelected}
+              onSelect={setBottomBackgroundSelected}
+              thumbSize={80}
+            />
+          )}
+        </SettingsCard>
+
+        {/* ── Bottom Font ── */}
+        <SettingsCard darkMode={darkMode}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 14,
+            }}
+          >
+            <Typography
+              variant="subtitle1"
+              style={{
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: 0.4,
+                color: darkMode ? "#e5e7eb" : "#1f2937",
+              }}
+            >
+              Bottom Item
+            </Typography>
+            <Switch
+              checked={!!enableBottomItem}
+              onChange={(e) => setEnableBottomItem(e.target.checked)}
+              size="small"
+            />
+          </div>
+          <RowLabel darkMode={darkMode}>Font Size: {bottomFontSize}px</RowLabel>
+          <Slider
+            min={8}
+            max={20}
+            step={1}
+            value={bottomFontSize}
+            onChange={(_, val) => setBottomFontSize(val)}
+            sx={{ color: "#3498db", mb: 1 }}
+          />
+          <ColorSelector
+            label="Dark Mode Color"
+            value={bottomFontDarkColor}
+            onChange={setBottomFontDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Color"
+            value={bottomFontLightColor}
+            onChange={setBottomFontLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+        </SettingsCard>
+
+        {/* ── Bottom Active ── */}
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Bottom Active Item</SectionTitle>
+          <ColorSelector
+            label="Dark Mode Background"
+            value={bottomActiveDarkColor}
+            onChange={setBottomActiveDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Background"
+            value={bottomActiveLightColor}
+            onChange={setBottomActiveLightColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Dark Mode Font Color"
+            value={bottomActiveFontDarkColor}
+            onChange={setBottomActiveFontDarkColor}
+            colorList={colorList}
+            darkMode={darkMode}
+          />
+          <ColorSelector
+            label="Light Mode Font Color"
+            value={bottomActiveFontLightColor}
+            onChange={setBottomActiveFontLightColor}
             colorList={colorList}
             darkMode={darkMode}
           />

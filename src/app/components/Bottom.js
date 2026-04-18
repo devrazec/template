@@ -51,6 +51,7 @@ export default function Bottom() {
     setEnableMenuBackground,
     enableBottomBackground,
     setEnableBottomBackground,
+    enableBottomItem, setEnableBottomItem,
     enableHeaderBackground,
     setEnableHeaderBackground,
   } = useContext(GlobalContext);
@@ -90,13 +91,15 @@ export default function Bottom() {
       }}
       elevation={3}
     >
-      <IconButton
-        size="small"
-        onClick={() => scroll(-1)}
-        sx={{ flexShrink: 0 }}
-      >
-        <ChevronLeftIcon />
-      </IconButton>
+      {enableBottomItem && (
+        <IconButton
+          size="small"
+          onClick={() => scroll(-1)}
+          sx={{ flexShrink: 0 }}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+      )}
 
       <div
         ref={scrollRef}
@@ -117,7 +120,7 @@ export default function Bottom() {
             backgroundColor: "transparent",
           }}
         >
-          {menuItem.map(({ text, icon }) => (
+          {enableBottomItem && menuItem.map(({ text, icon }) => (
             <BottomNavigationAction
               key={text}
               label={text}
@@ -154,9 +157,11 @@ export default function Bottom() {
         </BottomNavigation>
       </div>
 
-      <IconButton size="small" onClick={() => scroll(1)} sx={{ flexShrink: 0 }}>
-        <ChevronRightIcon />
-      </IconButton>
+      {enableBottomItem && (
+        <IconButton size="small" onClick={() => scroll(1)} sx={{ flexShrink: 0 }}>
+          <ChevronRightIcon />
+        </IconButton>
+      )}
     </Paper>
   );
 }
