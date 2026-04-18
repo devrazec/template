@@ -2,10 +2,14 @@
   "name": "template",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "clean_db": "node src/app/lib/db/clean_db.js",
+    "migrate": "node src/app/lib/db/migrate.js",
+    "seed_product": "node src/app/lib/db/seed_product.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -14,9 +18,11 @@
     "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
     "@mui/x-date-pickers": "^9.0.2",
+    "better-sqlite3": "^12.9.0",
     "dayjs": "^1.11.20",
     "next": "15.5.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "xlsx": "^0.18.5"
   }
 }
