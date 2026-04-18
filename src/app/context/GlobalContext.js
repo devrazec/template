@@ -419,7 +419,9 @@ export function GlobalProvider({ children }) {
   const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState('#000000');
   const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState('#ffffff');
   const [menuBackgroundSelected, setMenuBackgroundSelected] = useState('/menu/50.jpg');
-  
+  const [enableMenuItem, setEnableMenuItem] = useState(true);
+  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
+
   const [logoSelected, setLogoSelected] = useState('/logo/1.png');
   const [logoSize, setLogoSize] = useState({ width: 52, height: 52 });
   const [logoBackgroundSelected, setLogoBackgroundSelected] = useState('/menu/50.jpg');
@@ -442,7 +444,6 @@ export function GlobalProvider({ children }) {
   const [enableHeaderTitle, setEnableHeaderTitle] = useState(true);
   const [enableHeaderBackground, setEnableHeaderBackground] = useState(true);
 
-  const [enableMenuBackground, setEnableMenuBackground] = useState(true);
 
   return (
     <GlobalContext.Provider
@@ -500,6 +501,8 @@ export function GlobalProvider({ children }) {
         menuActiveFontDarkColor, setMenuActiveFontDarkColor,
         menuActiveFontLightColor, setMenuActiveFontLightColor,
         menuBackgroundSelected, setMenuBackgroundSelected,
+        enableMenuItem, setEnableMenuItem,
+        enableMenuBackground, setEnableMenuBackground,
 
         logoSelected, setLogoSelected,
         logoSize, setLogoSize,
@@ -519,8 +522,6 @@ export function GlobalProvider({ children }) {
         enableLogoTitle, setEnableLogoTitle,
         enableLogoSubTitle, setEnableLogoSubTitle,
         enableLogoBackground, setEnableLogoBackground,
-
-        enableMenuBackground, setEnableMenuBackground,
 
       }}
     >
