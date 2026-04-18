@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import jsonProduct from '../data/product.json';
 import jsonSettings from '../data/settings.json';
+import jsonSettingsList from '../data/settings_list.json';
 
 import HomeIcon from '@mui/icons-material/Home';
 import MicIcon from '@mui/icons-material/Mic';
@@ -32,6 +33,7 @@ export function GlobalProvider({ children }) {
 
   const [dbProduct, setDbProduct] = useState(jsonProduct);
   const [dbSettings, setDbSettings] = useState(jsonSettings);
+  const [dbSettingsList, setDbSettingsList] = useState(jsonSettingsList);
 
   const [selectedMonth, setSelectedMonth] = useState(dayjs());
   const [selectedWeek, setSelectedWeek] = useState(dayjs());
@@ -396,55 +398,55 @@ export function GlobalProvider({ children }) {
     { key: '140.jpg', source: '/headerbottom/140.jpg' },
   ]);
 
-  const [headerTitle, setHeaderTitle] = useState(jsonSettings.headerTitle || 'Header Title');
-  const [headerFontDarkColor, setHeaderFontDarkColor] = useState(jsonSettings.headerFontDarkColor || '#000000');
-  const [headerFontLightColor, setHeaderFontLightColor] = useState(jsonSettings.headerFontLightColor || '#ffffff');
-  const [headerFontSize, setHeaderFontSize] = useState(jsonSettings.headerFontSize || 20);
-  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState(jsonSettings.headerBackgroundSelected || '/headerbottom/61.jpg');
+  const [headerTitle, setHeaderTitle] = useState(jsonSettings.headerTitle);
+  const [headerFontDarkColor, setHeaderFontDarkColor] = useState(jsonSettings.headerFontDarkColor);
+  const [headerFontLightColor, setHeaderFontLightColor] = useState(jsonSettings.headerFontLightColor);
+  const [headerFontSize, setHeaderFontSize] = useState(jsonSettings.headerFontSize);
+  const [headerBackgroundSelected, setHeaderBackgroundSelected] = useState(jsonSettings.headerBackgroundSelected);
 
-  const [bottomFontDarkColor, setBottomFontDarkColor] = useState(jsonSettings.bottomFontDarkColor || '#000000');
-  const [bottomFontLightColor, setBottomFontLightColor] = useState(jsonSettings.bottomFontLightColor || '#ffffff');
-  const [bottomFontSize, setBottomFontSize] = useState(jsonSettings.bottomFontSize || 14);
-  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState(jsonSettings.bottomActiveDarkColor || '#490fe9');
-  const [bottomActiveLightColor, setBottomActiveLightColor] = useState(jsonSettings.bottomActiveLightColor || '#ae4040');
-  const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState(jsonSettings.bottomActiveFontDarkColor || '#000000');
-  const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState(jsonSettings.bottomActiveFontLightColor || '#ffffff');
-  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState(jsonSettings.bottomBackgroundSelected || '/headerbottom/61.jpg');
-  const [enableBottomItem, setEnableBottomItem] = useState(jsonSettings.enableBottomItem || true);
-  const [enableBottomBackground, setEnableBottomBackground] = useState(jsonSettings.enableBottomBackground || true);
+  const [bottomFontDarkColor, setBottomFontDarkColor] = useState(jsonSettings.bottomFontDarkColor);
+  const [bottomFontLightColor, setBottomFontLightColor] = useState(jsonSettings.bottomFontLightColor);
+  const [bottomFontSize, setBottomFontSize] = useState(jsonSettings.bottomFontSize);
+  const [bottomActiveDarkColor, setBottomActiveDarkColor] = useState(jsonSettings.bottomActiveDarkColor);
+  const [bottomActiveLightColor, setBottomActiveLightColor] = useState(jsonSettings.bottomActiveLightColor);
+  const [bottomActiveFontDarkColor, setBottomActiveFontDarkColor] = useState(jsonSettings.bottomActiveFontDarkColor);
+  const [bottomActiveFontLightColor, setBottomActiveFontLightColor] = useState(jsonSettings.bottomActiveFontLightColor);
+  const [bottomBackgroundSelected, setBottomBackgroundSelected] = useState(jsonSettings.bottomBackgroundSelected);
+  const [enableBottomItem, setEnableBottomItem] = useState(jsonSettings.enableBottomItem);
+  const [enableBottomBackground, setEnableBottomBackground] = useState(jsonSettings.enableBottomBackground);
 
-  const [menuFontDarkColor, setMenuFontDarkColor] = useState(jsonSettings.menuFontDarkColor || '#000000');
-  const [menuFontLightColor, setMenuFontLightColor] = useState(jsonSettings.menuFontLightColor || '#ffffff');
-  const [menuFontSize, setMenuFontSize] = useState(jsonSettings.menuFontSize || 20);
-  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState(jsonSettings.menuActiveDarkColor || '#3c2791');
-  const [menuActiveLightColor, setMenuActiveLightColor] = useState(jsonSettings.menuActiveLightColor || '#733131');
-  const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState(jsonSettings.menuActiveFontDarkColor || '#000000');
-  const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState(jsonSettings.menuActiveFontLightColor || '#ffffff');
-  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState(jsonSettings.menuBackgroundSelected || '/menu/50.jpg');
-  const [enableMenuItem, setEnableMenuItem] = useState(jsonSettings.enableMenuItem || true);
-  const [enableMenuBackground, setEnableMenuBackground] = useState(jsonSettings.enableMenuBackground || true);
+  const [menuFontDarkColor, setMenuFontDarkColor] = useState(jsonSettings.menuFontDarkColor);
+  const [menuFontLightColor, setMenuFontLightColor] = useState(jsonSettings.menuFontLightColor);
+  const [menuFontSize, setMenuFontSize] = useState(jsonSettings.menuFontSize);
+  const [menuActiveDarkColor, setMenuActiveDarkColor] = useState(jsonSettings.menuActiveDarkColor);
+  const [menuActiveLightColor, setMenuActiveLightColor] = useState(jsonSettings.menuActiveLightColor);
+  const [menuActiveFontDarkColor, setMenuActiveFontDarkColor] = useState(jsonSettings.menuActiveFontDarkColor);
+  const [menuActiveFontLightColor, setMenuActiveFontLightColor] = useState(jsonSettings.menuActiveFontLightColor);
+  const [menuBackgroundSelected, setMenuBackgroundSelected] = useState(jsonSettings.menuBackgroundSelected);
+  const [enableMenuItem, setEnableMenuItem] = useState(jsonSettings.enableMenuItem);
+  const [enableMenuBackground, setEnableMenuBackground] = useState(jsonSettings.enableMenuBackground);
 
-  const [logoSelected, setLogoSelected] = useState(jsonSettings.logoSelected || '/logo/1.png');
-  const [logoSize, setLogoSize] = useState(jsonSettings.logoSize || { width: 52, height: 52 });
-  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState(jsonSettings.logoBackgroundSelected || '/menu/50.jpg');
+  const [logoSelected, setLogoSelected] = useState(jsonSettings.logoSelected);
+  const [logoSize, setLogoSize] = useState(jsonSettings.logoSize);
+  const [logoBackgroundSelected, setLogoBackgroundSelected] = useState(jsonSettings.logoBackgroundSelected);
 
-  const [logoTitle, setLogoTitle] = useState(jsonSettings.logoTitle || 'Logo Title');
-  const [logoTitleSize, setLogoTitleSize] = useState(jsonSettings.logoTitleSize || 22);
-  const [logoTitleDarkColor, setLogoTitleDarkColor] = useState(jsonSettings.logoTitleDarkColor || '#000000');
-  const [logoTitleLightColor, setLogoTitleLightColor] = useState(jsonSettings.logoTitleLightColor || '#ffffff');
+  const [logoTitle, setLogoTitle] = useState(jsonSettings.logoTitle);
+  const [logoTitleSize, setLogoTitleSize] = useState(jsonSettings.logoTitleSize);
+  const [logoTitleDarkColor, setLogoTitleDarkColor] = useState(jsonSettings.logoTitleDarkColor);
+  const [logoTitleLightColor, setLogoTitleLightColor] = useState(jsonSettings.logoTitleLightColor);
 
-  const [logoSubTitle, setLogoSubTitle] = useState(jsonSettings.logoSubTitle || 'Logo SubTitle');
-  const [logoSubTitleSize, setLogoSubTitleSize] = useState(jsonSettings.logoSubTitleSize || 14);
-  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState(jsonSettings.logoSubTitleDarkColor || '#000000');
-  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState(jsonSettings.logoSubTitleLightColor || '#ffffff');
+  const [logoSubTitle, setLogoSubTitle] = useState(jsonSettings.logoSubTitle);
+  const [logoSubTitleSize, setLogoSubTitleSize] = useState(jsonSettings.logoSubTitleSize);
+  const [logoSubTitleDarkColor, setLogoSubTitleDarkColor] = useState(jsonSettings.logoSubTitleDarkColor);
+  const [logoSubTitleLightColor, setLogoSubTitleLightColor] = useState(jsonSettings.logoSubTitleLightColor);
 
-  const [enableLogo, setEnableLogo] = useState(jsonSettings.enableLogo || true);
-  const [enableLogoTitle, setEnableLogoTitle] = useState(jsonSettings.enableLogoTitle || true);
-  const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(jsonSettings.enableLogoSubTitle || true);
-  const [enableLogoBackground, setEnableLogoBackground] = useState(jsonSettings.enableLogoBackground || true);
+  const [enableLogo, setEnableLogo] = useState(jsonSettings.enableLogo);
+  const [enableLogoTitle, setEnableLogoTitle] = useState(jsonSettings.enableLogoTitle);
+  const [enableLogoSubTitle, setEnableLogoSubTitle] = useState(jsonSettings.enableLogoSubTitle);
+  const [enableLogoBackground, setEnableLogoBackground] = useState(jsonSettings.enableLogoBackground);
 
-  const [enableHeaderTitle, setEnableHeaderTitle] = useState(jsonSettings.enableHeaderTitle || true);
-  const [enableHeaderBackground, setEnableHeaderBackground] = useState(jsonSettings.enableHeaderBackground || true);
+  const [enableHeaderTitle, setEnableHeaderTitle] = useState(jsonSettings.enableHeaderTitle);
+  const [enableHeaderBackground, setEnableHeaderBackground] = useState(jsonSettings.enableHeaderBackground);
 
   return (
     <GlobalContext.Provider
@@ -460,6 +462,7 @@ export function GlobalProvider({ children }) {
         setDbProduct,
 
         dbSettings, setDbSettings,
+        dbSettingsList, setDbSettingsList,
 
         selectedDate,
         setSelectedDate,

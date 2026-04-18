@@ -260,6 +260,7 @@ export default function SettingsPage() {
     enableMenuItem, setEnableMenuItem,
     enableMenuBackground,
     setEnableMenuBackground,
+    dbSettingsList, setDbSettingsList,
   } = useContext(GlobalContext);
 
   const { showLoading, hideLoading } = useLoading();

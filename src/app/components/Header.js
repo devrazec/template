@@ -219,7 +219,7 @@ export default function Header() {
             )}
           </Box>
 
-          <IconButton color="primary" onClick={() => setDarkMode(!darkMode)}>
+          <IconButton sx={{ color: darkMode ? headerFontLightColor : headerFontDarkColor }} onClick={() => setDarkMode(!darkMode)}>
             {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
         </Box>
