@@ -260,6 +260,7 @@ export default function SettingsPage() {
     enableMenuItem, setEnableMenuItem,
     enableMenuBackground,
     setEnableMenuBackground,
+    dbSettings, setDbSettings,
     dbSettingsList, setDbSettingsList,
   } = useContext(GlobalContext);
 
@@ -275,6 +276,51 @@ export default function SettingsPage() {
   const textColor = darkMode ? "#f3f4f6" : "#111827";
   const labelColor = darkMode ? "#9ca3af" : "#6b7280";
 
+  function applyTheme(theme) {
+    setDbSettings(theme);
+    setLogoSelected(theme.logoSelected);
+    setLogoSize(theme.logoSize);
+    setLogoBackgroundSelected(theme.logoBackgroundSelected);
+    setEnableLogo(theme.enableLogo);
+    setEnableLogoBackground(theme.enableLogoBackground);
+    setLogoTitle(theme.logoTitle);
+    setLogoTitleSize(theme.logoTitleSize);
+    setLogoTitleDarkColor(theme.logoTitleDarkColor);
+    setLogoTitleLightColor(theme.logoTitleLightColor);
+    setEnableLogoTitle(theme.enableLogoTitle);
+    setLogoSubTitle(theme.logoSubTitle);
+    setLogoSubTitleSize(theme.logoSubTitleSize);
+    setLogoSubTitleDarkColor(theme.logoSubTitleDarkColor);
+    setLogoSubTitleLightColor(theme.logoSubTitleLightColor);
+    setEnableLogoSubTitle(theme.enableLogoSubTitle);
+    setHeaderFontSize(theme.headerFontSize);
+    setHeaderFontDarkColor(theme.headerFontDarkColor);
+    setHeaderFontLightColor(theme.headerFontLightColor);
+    setHeaderBackgroundSelected(theme.headerBackgroundSelected);
+    setEnableHeaderTitle(theme.enableHeaderTitle);
+    setEnableHeaderBackground(theme.enableHeaderBackground);
+    setBottomFontSize(theme.bottomFontSize);
+    setBottomFontDarkColor(theme.bottomFontDarkColor);
+    setBottomFontLightColor(theme.bottomFontLightColor);
+    setBottomActiveDarkColor(theme.bottomActiveDarkColor);
+    setBottomActiveLightColor(theme.bottomActiveLightColor);
+    setBottomActiveFontDarkColor(theme.bottomActiveFontDarkColor);
+    setBottomActiveFontLightColor(theme.bottomActiveFontLightColor);
+    setBottomBackgroundSelected(theme.bottomBackgroundSelected);
+    setEnableBottomItem(theme.enableBottomItem);
+    setEnableBottomBackground(theme.enableBottomBackground);
+    setMenuFontSize(theme.menuFontSize);
+    setMenuFontDarkColor(theme.menuFontDarkColor);
+    setMenuFontLightColor(theme.menuFontLightColor);
+    setMenuActiveDarkColor(theme.menuActiveDarkColor);
+    setMenuActiveLightColor(theme.menuActiveLightColor);
+    setMenuActiveFontDarkColor(theme.menuActiveFontDarkColor);
+    setMenuActiveFontLightColor(theme.menuActiveFontLightColor);
+    setMenuBackgroundSelected(theme.menuBackgroundSelected);
+    setEnableMenuItem(theme.enableMenuItem);
+    setEnableMenuBackground(theme.enableMenuBackground);
+  }
+
   return (
     <Layout>
       <div
@@ -285,6 +331,74 @@ export default function SettingsPage() {
           background: darkMode ? "#111827" : "#f3f4f6",
         }}
       >
+        {/* ══ THEME SELECTOR ════════════════════════════════════════════ */}
+        <Typography
+          variant="h6"
+          style={{ fontWeight: 700, color: textColor, marginBottom: 18 }}
+        >
+          Theme
+        </Typography>
+        <SettingsCard darkMode={darkMode}>
+          <SectionTitle darkMode={darkMode}>Theme Preview</SectionTitle>
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              overflowX: "auto",
+              paddingBottom: 6,
+              paddingTop: 2,
+            }}
+          >
+            {dbSettingsList.map((theme) => {
+              const isSelected = dbSettings.key === theme.key;
+              return (
+                <div
+                  key={theme.key}
+                  onClick={() => applyTheme(theme)}
+                  style={{
+                    flexShrink: 0,
+                    width: 110,
+                    cursor: "pointer",
+                    borderRadius: 10,
+                    overflow: "hidden",
+                    border: isSelected ? "3px solid #3498db" : "3px solid transparent",
+                    boxSizing: "border-box",
+                    boxShadow: isSelected ? "0 0 0 1px #3498db" : "none",
+                  }}
+                >
+                  <div style={{ position: "relative", height: 72 }}>
+                    <Image
+                      src={theme.source}
+                      alt={theme.key}
+                      fill
+                      sizes="110px"
+                      style={{ objectFit: "fill" }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      padding: "5px 7px",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: isSelected
+                        ? "#3498db"
+                        : darkMode
+                          ? "#e5e7eb"
+                          : "#1f2937",
+                      background: darkMode ? "#1f2937" : "#ffffff",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </SettingsCard>
+
         <Typography
           variant="h6"
           style={{ fontWeight: 700, color: textColor, marginBottom: 18 }}
